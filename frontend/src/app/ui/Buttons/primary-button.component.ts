@@ -9,8 +9,18 @@ import { CommonModule } from '@angular/common';
     <button 
       [class]="buttonClasses"
       [type]="type"
-      [disabled]="disabled">
-      <ng-content></ng-content>
+      [disabled]="disabled || isLoading"
+      [style.width]="fullWidth ? '100%' : 'auto'">
+      <ng-container *ngIf="isLoading; else content">
+        <svg class="animate-spin -ml-1 mr-2 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+          <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+          <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+        </svg>
+        Loading...
+      </ng-container>
+      <ng-template #content>
+        <ng-content></ng-content>
+      </ng-template>
     </button>
   `,
   styles: [`
@@ -73,12 +83,27 @@ import { CommonModule } from '@angular/common';
       transform: none;
       box-shadow: none;
     }
+
+    .animate-spin {
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      from {
+        transform: rotate(0deg);
+      }
+      to {
+        transform: rotate(360deg);
+      }
+    }
   `]
 })
 export class PrimaryButtonComponent {
   @Input() variant: 'primary' | 'secondary' | 'white' = 'primary';
   @Input() type: 'button' | 'submit' = 'button';
   @Input() disabled: boolean = false;
+  @Input() isLoading: boolean = false;
+  @Input() fullWidth: boolean = false;
 
   get buttonClasses(): string {
     return this.variant;

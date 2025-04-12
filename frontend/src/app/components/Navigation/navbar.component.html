@@ -17,9 +17,14 @@
     </div>
 
     <!-- CTA Button -->
-    <a routerLink="/register" class="cta-button">
-      Jetzt starten
-    </a>
+    <div class="cta-buttons">
+      <a routerLink="/login" class="login-button">
+        Login
+      </a>
+      <a routerLink="/register" class="cta-button">
+        Jetzt starten
+      </a>
+    </div>
 
     <!-- Mobile Menu Button -->
     <button class="mobile-menu-button" (click)="toggleMobileMenu()">
@@ -33,6 +38,7 @@
     <a routerLink="/pricing" class="nav-link">Preise</a>
     <a routerLink="/docs" class="nav-link">Dokumentation</a>
     <a routerLink="/faq" class="nav-link">FAQ</a>
+    <a routerLink="/login" class="nav-link">Login</a>
     <a routerLink="/register" class="cta-button">Jetzt starten</a>
   </div>
 </nav> 
