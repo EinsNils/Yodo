@@ -4,6 +4,7 @@ import { HeroSectionComponent } from '../../components/Header/hero-section.compo
 import { FooterComponent } from '../../components/Footer/footer.component';
 import { FeatureCardComponent } from '../../ui/Cards/feature-card.component';
 import { PrimaryButtonComponent } from '../../ui/Buttons/primary-button.component';
+import { NavbarComponent } from '../../components/Navigation/navbar.component';
 
 @Component({
   selector: 'app-home',
@@ -13,7 +14,8 @@ import { PrimaryButtonComponent } from '../../ui/Buttons/primary-button.componen
     HeroSectionComponent,
     FooterComponent,
     FeatureCardComponent,
-    PrimaryButtonComponent
+    PrimaryButtonComponent,
+    NavbarComponent
   ],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']

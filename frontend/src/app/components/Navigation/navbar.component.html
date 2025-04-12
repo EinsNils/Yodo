@@ -1,0 +1,38 @@
+<nav class="navbar" [class.scrolled]="isScrolled">
+  <div class="navbar-content">
+    <!-- Logo -->
+    <a routerLink="/" class="logo">
+      <svg class="logo-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M13 10V3L4 14H11V21L20 10H13Z" fill="currentColor"/>
+      </svg>
+      <span class="logo-text">YODO</span>
+    </a>
+
+    <!-- Navigation Links -->
+    <div class="nav-links">
+      <a routerLink="/features" class="nav-link">Features</a>
+      <a routerLink="/pricing" class="nav-link">Preise</a>
+      <a routerLink="/docs" class="nav-link">Dokumentation</a>
+      <a routerLink="/faq" class="nav-link">FAQ</a>
+    </div>
+
+    <!-- CTA Button -->
+    <a routerLink="/register" class="cta-button">
+      Jetzt starten
+    </a>
+
+    <!-- Mobile Menu Button -->
+    <button class="mobile-menu-button" (click)="toggleMobileMenu()">
+      <span>☰</span>
+    </button>
+  </div>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" [class.active]="isMobileMenuOpen">
+    <a routerLink="/features" class="nav-link">Features</a>
+    <a routerLink="/pricing" class="nav-link">Preise</a>
+    <a routerLink="/docs" class="nav-link">Dokumentation</a>
+    <a routerLink="/faq" class="nav-link">FAQ</a>
+    <a routerLink="/register" class="cta-button">Jetzt starten</a>
+  </div>
+</nav> 
