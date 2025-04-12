@@ -1,0 +1,151 @@
+<div class="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800 text-white">
+  <app-navbar></app-navbar>
+  <app-hero-section></app-hero-section>
+
+  <!-- Product Preview -->
+  <section class="py-16 bg-gradient-to-b from-gray-800 to-gray-900">
+    <div class="container mx-auto px-4">
+      <div class="relative max-w-6xl mx-auto">
+        <img src="https://placehold.co/1200x675?text=YODO+Dashboard" alt="YODO Dashboard" class="rounded-lg shadow-2xl mx-auto w-full hover:scale-[1.02] transition-transform duration-500">
+        <div class="absolute -bottom-5 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-indigo-600 to-indigo-500 text-white px-6 py-3 rounded-full text-base font-medium shadow-lg">
+          <i class="fa-solid fa-bolt-lightning mr-2"></i> Einmalige Einrichtung, lebenslange Effizienz
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section class="py-16 bg-gradient-to-b from-gray-900 to-gray-800 text-white">
+    <div class="container mx-auto px-4">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold mb-4 text-white">Effizienter arbeiten mit YODO</h2>
+        <p class="text-gray-300 max-w-2xl mx-auto">Unsere Plattform bietet alles, was dein Team braucht, um Projekte erfolgreich zu planen, umzusetzen und zu verfolgen.</p>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div *ngFor="let feature of features" class="h-full">
+          <app-feature-card 
+            [title]="feature.title"
+            [description]="feature.description"
+            [icon]="feature.icon"
+            class="h-full"
+          ></app-feature-card>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials Section -->
+  <section class="py-16 bg-gradient-to-b from-gray-800 to-gray-900 text-white">
+    <div class="container mx-auto px-4">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold mb-4 text-white">Was unsere Kunden sagen</h2>
+        <p class="text-gray-300 max-w-2xl mx-auto">Höre, wie YODO Teams auf der ganzen Welt hilft, produktiver zu arbeiten und ihre Ziele zu erreichen.</p>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div *ngFor="let testimonial of testimonials" class="bg-gray-700/70 p-6 rounded-xl shadow-md hover:shadow-lg transition-all duration-300 hover:translate-y-[-5px] testimonial-card border border-gray-600/50 backdrop-blur-sm">
+          <div class="mb-5 text-indigo-300">
+            <i class="fa-solid fa-quote-left text-2xl opacity-40"></i>
+          </div>
+          <p class="text-gray-300 mb-6">{{ testimonial.quote }}</p>
+          <div class="flex items-center">
+            <div class="bg-gradient-to-br from-indigo-600 to-purple-600 rounded-full w-10 h-10 flex items-center justify-center mr-3 text-white font-bold">
+              {{ testimonial.name.charAt(0) }}
+            </div>
+            <div>
+              <p class="font-bold text-white">{{ testimonial.name }}</p>
+              <p class="text-sm text-gray-400">{{ testimonial.role }}, {{ testimonial.company }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing Section -->
+  <section class="py-16 bg-gradient-to-b from-gray-900 to-gray-800 text-white">
+    <div class="container mx-auto px-4">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold mb-4 text-white">Einfache und transparente Preise</h2>
+        <p class="text-gray-300 max-w-2xl mx-auto">Wähle den Plan, der am besten zu deinen Anforderungen passt.</p>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+        <div *ngFor="let plan of pricingPlans" 
+             class="bg-gray-700/70 rounded-xl p-8 flex flex-col h-full shadow-md hover:shadow-xl transition-all duration-300 hover:translate-y-[-5px] border border-gray-600/50 backdrop-blur-sm" 
+             [class.border-2]="plan.recommended" 
+             [class.border-indigo-400]="plan.recommended">
+          <div class="mb-4">
+            <span *ngIf="plan.recommended" class="bg-gradient-to-r from-indigo-600 to-indigo-400 text-white text-sm py-1 px-4 rounded-full font-medium shadow-md">Empfohlen</span>
+          </div>
+          <h3 class="text-2xl font-bold text-white">{{ plan.name }}</h3>
+          <div class="mt-4 mb-4">
+            <span class="text-4xl font-bold text-white">{{ plan.price }}</span>
+            <span class="text-gray-400"> / {{ plan.billingPeriod }}</span>
+          </div>
+          <p class="text-gray-300 mb-6">{{ plan.description }}</p>
+          <ul class="mb-8 flex-grow">
+            <li *ngFor="let feature of plan.features" class="flex items-center mb-3">
+              <div class="flex-shrink-0 w-5 h-5 bg-gradient-to-r from-indigo-500 to-indigo-400 rounded-full flex items-center justify-center mr-3">
+                <i class="fa-solid fa-check text-xs text-white"></i>
+              </div>
+              <span class="text-gray-300">{{ feature }}</span>
+            </li>
+          </ul>
+          <div class="mt-auto">
+            <app-primary-button
+              [variant]="plan.recommended ? 'primary' : 'secondary'"
+              class="w-full"
+            >
+              {{ plan.ctaText }}
+            </app-primary-button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Call to Action -->
+  <section class="py-16 bg-gradient-to-r from-indigo-700 to-indigo-600 text-white text-center">
+    <div class="container mx-auto px-4">
+      <h2 class="text-3xl font-bold mb-4">Bereit, loszulegen?</h2>
+      <p class="text-xl mb-8 max-w-2xl mx-auto opacity-90">Erhalte 14 Tage kostenlosen Zugang zu allen YODO-Funktionen. Keine Kreditkarte erforderlich.</p>
+      <app-primary-button variant="primary">
+        <i class="fa-solid fa-rocket mr-2"></i> Kostenlos starten
+      </app-primary-button>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section class="py-16 bg-gradient-to-b from-gray-800 to-gray-900 text-white">
+    <div class="container mx-auto px-4">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold mb-4 text-white">Häufig gestellte Fragen</h2>
+        <p class="text-gray-300 max-w-2xl mx-auto">Hier findest du Antworten auf die am häufigsten gestellten Fragen zu YODO. Falls du weitere Fragen hast, kontaktiere uns gerne.</p>
+      </div>
+      
+      <div class="max-w-3xl mx-auto">
+        <div *ngFor="let item of faqItems; let i = index" class="mb-5">
+          <div 
+            (click)="toggleFaqItem(i)" 
+            class="flex justify-between items-center p-5 bg-gray-700/70 hover:bg-gray-600/70 rounded-xl cursor-pointer transition-all duration-200 border border-gray-600/50 backdrop-blur-sm"
+          >
+            <h3 class="text-lg font-semibold text-white">{{ item.question }}</h3>
+            <div class="w-8 h-8 rounded-full bg-gray-600/80 flex items-center justify-center transform transition-transform text-indigo-300" [ngClass]="{'rotate-180': item.isOpen}">
+              <i class="fa-solid fa-chevron-down text-sm"></i>
+            </div>
+          </div>
+          <div 
+            *ngIf="item.isOpen" 
+            class="p-5 bg-gray-800/70 border border-gray-700/50 rounded-b-xl mt-1 backdrop-blur-sm"
+          >
+            <p class="text-gray-300">{{ item.answer }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <app-footer></app-footer>
+</div>
