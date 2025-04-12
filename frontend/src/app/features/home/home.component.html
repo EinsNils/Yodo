@@ -44,10 +44,16 @@
       </div>
       
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-        <div *ngFor="let testimonial of testimonials" class="bg-gray-700 p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow testimonial-card border border-gray-600">
-          <p class="text-gray-300 mb-4">{{ testimonial.quote }}</p>
+        <div *ngFor="let testimonial of testimonials" class="bg-gray-700/70 p-6 rounded-xl shadow-md hover:shadow-lg transition-all duration-300 hover:translate-y-[-5px] testimonial-card border border-gray-600/50 backdrop-blur-sm">
+          <div class="mb-5 text-indigo-300">
+            <i class="fa-solid fa-quote-left text-2xl opacity-40"></i>
+          </div>
+          <p class="text-gray-300 mb-6">{{ testimonial.quote }}</p>
           <div class="flex items-center">
-            <div class="ml-0">
+            <div class="bg-gradient-to-br from-indigo-600 to-purple-600 rounded-full w-10 h-10 flex items-center justify-center mr-3 text-white font-bold">
+              {{ testimonial.name.charAt(0) }}
+            </div>
+            <div>
               <p class="font-bold text-white">{{ testimonial.name }}</p>
               <p class="text-sm text-gray-400">{{ testimonial.role }}, {{ testimonial.company }}</p>
             </div>
@@ -67,23 +73,23 @@
       
       <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
         <div *ngFor="let plan of pricingPlans" 
-             class="bg-gray-700 rounded-lg p-6 flex flex-col h-full shadow-sm hover:shadow-md transition-shadow border border-gray-600" 
+             class="bg-gray-700/70 rounded-xl p-8 flex flex-col h-full shadow-md hover:shadow-xl transition-all duration-300 hover:translate-y-[-5px] border border-gray-600/50 backdrop-blur-sm" 
              [class.border-2]="plan.recommended" 
-             [class.border-indigo-500]="plan.recommended">
+             [class.border-indigo-400]="plan.recommended">
           <div class="mb-4">
-            <span *ngIf="plan.recommended" class="bg-gradient-to-r from-indigo-600 to-indigo-500 text-white text-sm py-1 px-3 rounded-full font-medium">Empfohlen</span>
+            <span *ngIf="plan.recommended" class="bg-gradient-to-r from-indigo-600 to-indigo-400 text-white text-sm py-1 px-4 rounded-full font-medium shadow-md">Empfohlen</span>
           </div>
           <h3 class="text-2xl font-bold text-white">{{ plan.name }}</h3>
           <div class="mt-4 mb-4">
-            <span class="text-3xl font-bold text-white">{{ plan.price }}</span>
+            <span class="text-4xl font-bold text-white">{{ plan.price }}</span>
             <span class="text-gray-400"> / {{ plan.billingPeriod }}</span>
           </div>
           <p class="text-gray-300 mb-6">{{ plan.description }}</p>
-          <ul class="mb-6 flex-grow">
-            <li *ngFor="let feature of plan.features" class="flex items-center mb-2">
-              <svg class="w-5 h-5 text-indigo-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-              </svg>
+          <ul class="mb-8 flex-grow">
+            <li *ngFor="let feature of plan.features" class="flex items-center mb-3">
+              <div class="flex-shrink-0 w-5 h-5 bg-gradient-to-r from-indigo-500 to-indigo-400 rounded-full flex items-center justify-center mr-3">
+                <i class="fa-solid fa-check text-xs text-white"></i>
+              </div>
               <span class="text-gray-300">{{ feature }}</span>
             </li>
           </ul>
@@ -120,21 +126,19 @@
       </div>
       
       <div class="max-w-3xl mx-auto">
-        <div *ngFor="let item of faqItems; let i = index" class="mb-4">
+        <div *ngFor="let item of faqItems; let i = index" class="mb-5">
           <div 
             (click)="toggleFaqItem(i)" 
-            class="flex justify-between items-center p-4 bg-gray-700 hover:bg-gray-600 rounded-lg cursor-pointer transition-colors border border-gray-600"
+            class="flex justify-between items-center p-5 bg-gray-700/70 hover:bg-gray-600/70 rounded-xl cursor-pointer transition-all duration-200 border border-gray-600/50 backdrop-blur-sm"
           >
             <h3 class="text-lg font-semibold text-white">{{ item.question }}</h3>
-            <span class="transform transition-transform text-indigo-400" [ngClass]="{'rotate-180': item.isOpen}">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <polyline points="6 9 12 15 18 9"></polyline>
-              </svg>
-            </span>
+            <div class="w-8 h-8 rounded-full bg-gray-600/80 flex items-center justify-center transform transition-transform text-indigo-300" [ngClass]="{'rotate-180': item.isOpen}">
+              <i class="fa-solid fa-chevron-down text-sm"></i>
+            </div>
           </div>
           <div 
             *ngIf="item.isOpen" 
-            class="p-4 bg-gray-800 border border-gray-700 rounded-b-lg mt-1"
+            class="p-5 bg-gray-800/70 border border-gray-700/50 rounded-b-xl mt-1 backdrop-blur-sm"
           >
             <p class="text-gray-300">{{ item.answer }}</p>
           </div>
