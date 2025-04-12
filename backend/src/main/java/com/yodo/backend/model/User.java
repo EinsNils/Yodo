@@ -1,5 +1,6 @@
 package com.yodo.backend.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import java.util.UUID;
 import lombok.Data;
@@ -11,6 +12,7 @@ public class User {
 
   @Id
   @GeneratedValue(strategy = GenerationType.UUID)
+  @JsonIgnore
   private UUID uuid;
 
   private String firstName;
@@ -20,5 +22,5 @@ public class User {
   @Column(unique = true)
   private String email;
 
-  private String password;
+  @JsonIgnore private String password;
 }
