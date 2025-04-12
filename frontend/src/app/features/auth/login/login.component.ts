@@ -21,6 +21,7 @@ export class LoginComponent implements OnInit {
   isSubmitting = false;
   showPassword = false;
   isLoading = false;
+  submitted = false;
 
   constructor(private fb: FormBuilder) {
     this.loginForm = this.fb.group({
