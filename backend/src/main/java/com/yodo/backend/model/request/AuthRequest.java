@@ -1,4 +1,4 @@
-package com.yodo.backend.request;
+package com.yodo.backend.model.request;
 
 import lombok.Data;
 

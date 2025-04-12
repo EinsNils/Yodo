@@ -2,11 +2,13 @@ package com.yodo.backend.controller;
 
 import com.yodo.backend.Repository.UserRepository;
 import com.yodo.backend.model.User;
-import com.yodo.backend.request.AuthRequest;
+import com.yodo.backend.model.request.AuthRequest;
 import com.yodo.backend.security.JwtTokenProvider;
 import java.util.Optional;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -33,9 +35,9 @@ public class AuthController {
     this.jwtTokenProvider = jwtTokenProvider;
   }
 
-  @PostMapping("/register")
+  @PostMapping(value = "/register")
   public ResponseEntity<User> register(@RequestBody AuthRequest authRequest) {
-    Optional<User> userOptional = userRepository.findByEmail(authRequest.getEmail());
+    Optional<User> userOptional = userRepository.findUserByEmail(authRequest.getEmail());
 
     if (userOptional.isPresent()) {
       return ResponseEntity.badRequest().build();
@@ -47,7 +49,18 @@ public class AuthController {
     user.setEmail(authRequest.getEmail());
     user.setPassword(passwordEncoder.encode(authRequest.getPassword()));
 
-    User savedUser = userRepository.save(user);
-    return ResponseEntity.ok(savedUser);
+    User created = userRepository.save(user);
+
+    return ResponseEntity.ok(created);
+  }
+
+  @PostMapping(value = "/login")
+  public ResponseEntity<String> login(@RequestBody AuthRequest authRequest) {
+    Authentication authentication =
+        authenticationManager.authenticate(
+            new UsernamePasswordAuthenticationToken(
+                authRequest.getEmail(), authRequest.getPassword()));
+
+    return ResponseEntity.ok(jwtTokenProvider.generateToken(authentication));
   }
 }
