@@ -1,0 +1,93 @@
+<div class="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800 text-white">
+  <app-hero-section></app-hero-section>
+
+  <!-- Product Preview -->
+  <section class="py-20 bg-gray-800">
+    <div class="container mx-auto px-4">
+      <div class="relative">
+        <img src="assets/dashboard-preview.png" alt="YODO Dashboard" class="rounded-lg shadow-2xl mx-auto">
+        <div class="absolute -bottom-4 left-1/2 transform -translate-x-1/2 bg-blue-500 text-white px-6 py-2 rounded-full">
+          Einmalige Einrichtung, lebenslange Effizienz
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section class="container mx-auto px-4 py-20">
+    <h2 class="text-4xl font-bold text-center mb-16">Hauptfunktionen</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+      <app-feature-card 
+        *ngFor="let feature of features"
+        [title]="feature.title"
+        [description]="feature.description"
+        [icon]="feature.icon">
+      </app-feature-card>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="bg-gray-800 py-20">
+    <div class="container mx-auto px-4">
+      <h2 class="text-4xl font-bold text-center mb-16">Was unsere Nutzer sagen</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div *ngFor="let testimonial of testimonials" 
+             class="bg-gray-700 p-8 rounded-lg testimonial-card">
+          <p class="text-gray-300 mb-6">"{{testimonial.text}}"</p>
+          <div class="flex items-center">
+            <div class="w-12 h-12 bg-gray-600 rounded-full mr-4"></div>
+            <div>
+              <p class="font-semibold">{{testimonial.name}}</p>
+              <p class="text-sm text-gray-400">{{testimonial.role}}</p>
+              <p class="text-sm text-gray-400">{{testimonial.company}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing -->
+  <section class="container mx-auto px-4 py-20">
+    <h2 class="text-4xl font-bold text-center mb-16">Preise</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+      <div *ngFor="let plan of pricingPlans" 
+           class="bg-gray-700 p-8 rounded-lg"
+           [class.border-2]="plan.recommended"
+           [class.border-blue-500]="plan.recommended">
+        <div class="text-center mb-8">
+          <h3 class="text-2xl font-bold mb-4">{{plan.name}}</h3>
+          <p class="text-4xl font-bold mb-2">{{plan.price}}</p>
+          <p class="text-gray-400">{{plan.period}}</p>
+        </div>
+        <ul class="mb-8">
+          <li *ngFor="let feature of plan.features" 
+              class="flex items-center mb-4">
+            <i class="icon-check text-green-500 mr-2"></i>
+            {{feature}}
+          </li>
+        </ul>
+        <app-primary-button 
+          [variant]="plan.recommended ? 'primary' : 'secondary'"
+          class="w-full">
+          {{plan.cta}}
+        </app-primary-button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <section class="container mx-auto px-4 py-20">
+    <div class="text-center max-w-3xl mx-auto">
+      <h2 class="text-4xl font-bold mb-6">Bereit, es richtig zu machen?</h2>
+      <p class="text-xl text-gray-300 mb-8">
+        Schließe dich Tausenden von Teams an, die verstanden haben, dass es wichtig ist, Dinge gleich beim ersten Mal richtig zu machen.
+      </p>
+      <app-primary-button>
+        Kostenlos starten
+      </app-primary-button>
+    </div>
+  </section>
+
+  <app-footer></app-footer>
+</div> 
