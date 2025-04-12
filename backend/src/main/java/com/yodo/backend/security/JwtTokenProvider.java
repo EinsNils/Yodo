@@ -1,11 +1,12 @@
 package com.yodo.backend.security;
 
-import com.yodo.backend.model.User;
 import io.jsonwebtoken.*;
-import io.jsonwebtoken.Jwts;
-import java.sql.Date;
+import io.jsonwebtoken.io.Decoders;
+import io.jsonwebtoken.security.Keys;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
+import java.util.Date;
+import javax.crypto.SecretKey;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
@@ -15,24 +16,24 @@ import org.springframework.stereotype.Component;
 @Slf4j
 public class JwtTokenProvider {
 
-  @Value("{app.jwtSecret}")
+  @Value("${app.jwtSecret}")
   private String jwtSecret;
 
   public String generateToken(String userEmail) {
     Instant now = Instant.now();
     Instant expiryDate = now.plus(1, ChronoUnit.HOURS);
+    SecretKey key = Keys.hmacShaKeyFor(Decoders.BASE64.decode(jwtSecret));
 
     return Jwts.builder()
         .setSubject(userEmail)
         .setIssuedAt(Date.from(now))
-        .setExpiration(java.util.Date.from(expiryDate))
-        .signWith(io.jsonwebtoken.SignatureAlgorithm.HS512, jwtSecret)
+        .setExpiration(Date.from(expiryDate))
+        .signWith(key)
         .compact();
   }
 
   public String generateToken(Authentication authentication) {
-    User user = (User) authentication.getPrincipal();
-    return generateToken(user.getEmail());
+    return generateToken(authentication.getName());
   }
 
   public String getUserMailFromToken(String token) {
